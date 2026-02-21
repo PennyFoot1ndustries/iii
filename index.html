@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carousel Navigation</title>
+
+<style>
+  body {
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    overflow: hidden;
+  }
+
+  .carousel {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .slide {
+    min-width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    color: white;
+  }
+
+  .slide:nth-child(1) { background: #1e1e2f; }
+  .slide:nth-child(2) { background: #2f1e2f; }
+  .slide:nth-child(3) { background: #1e2f2f; }
+
+  .controls {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+  }
+
+  button {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background: #ffffff22;
+    color: white;
+  }
+
+  button:hover {
+    background: #ffffff44;
+  }
+</style>
+</head>
+
+<body>
+
+<div id="carousel" class="carousel">
+  <div class="slide">Home</div>
+  <div class="slide">Projects</div>
+  <div class="slide">Contact</div>
+</div>
+
+<div class="controls">
+  <button onclick="prev()">Prev</button>
+  <button onclick="next()">Next</button>
+</div>
+
+<script>
+  const carousel = document.getElementById("carousel");
+  let index = 0;
+  const totalSlides = document.querySelectorAll(".slide").length;
+
+  function updateCarousel() {
+    carousel.style.transform = `translateX(-${index * 100}vw)`;
+  }
+
+  function next() {
+    index = (index + 1) % totalSlides;
+    updateCarousel();
+  }
+
+  function prev() {
+    index = (index - 1 + totalSlides) % totalSlides;
+    updateCarousel();
+  }
+</script>
+
+</body>
+</html>
